@@ -1,3 +1,5 @@
+import time
+
 from pages.base import Base
 from locators.project_page import ProjectPage
 from data.assertions import Assertions
@@ -58,6 +60,7 @@ class Project(Base):
                 f"Элемент с селектором '{button_selector}' не найден на странице.")
         initial_style = element.evaluate('el => el.getAttribute("style")')
         self.click(button_selector)
+        time.sleep(5)
         new_style = element.evaluate('el => el.getAttribute("style")')
         assert initial_style != new_style, "Стиль кнопки не изменился после нажатия"
 
