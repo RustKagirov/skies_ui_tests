@@ -1,5 +1,3 @@
-import time
-
 from pages.base import Base
 from locators.project_page import ProjectPage
 from data.assertions import Assertions

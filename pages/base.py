@@ -1,5 +1,4 @@
 from playwright.sync_api import Page, TimeoutError, Response, expect
-from playwright.sync_api import Page, TimeoutError, Response
 from data.environment import host
 import random
 
@@ -34,26 +33,8 @@ class Base:
     def wait_for_element(self, locator, timeout=12000) -> None:
         self.page.wait_for_selector(locator, timeout=timeout)
 
-    def wait_for_all_elements(self, locator, timeout=5000):  # ожидание всех элементов
-        elements = self.page.query_selector_all(locator)
-
-        for element in elements:
-            self.page.wait_for_selector(locator, timeout=timeout)
-
-        return elements
-
     def current_url(self) -> str:  # возвращает урл
         return self.page.url
-
-    # находим чекбокс по инкдексу и кликаем
-    def checkbox_by_index(self, locator: str, index: int):
-        elements = self.page.query_selector_all(locator)
-        # Проверка наличия элемента с указанным индексом
-        if 0 <= index < len(elements):
-            # Поставить чек-бокс по элементу с указанным индексом
-            elements[index].check()
-        else:
-            print(f"Элемент с индексом {index} не найден.")
 
     # кликаем по первому элементу, если по индексу выдает out of range
     def click_first_element(self, locator: str):
@@ -81,14 +62,6 @@ class Base:
         except TimeoutError as e:
             return False
         return True
-
-    # если элемента нет, то все ок
-    def is_element_NOT_presence(self, locator: str) -> bool:
-        try:
-            self.page.wait_for_selector(locator, timeout=5000)
-        except TimeoutError as e:
-            return True
-        return False
 
     # выпадающи список, выбираем значение в валуе
     def selector(self, locator: str, value: str):

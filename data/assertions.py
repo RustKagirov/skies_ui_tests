@@ -13,10 +13,7 @@ class Assertions(Base):
             f"{host.get_base_url()}{uri}", timeout=10000), msg
 
     def to_contain_text(self, locator, text: str, msg: str):
-        try:
-            expect(locator).to_contain_text(text)
-        except AssertionError:
-            raise AssertionError(msg)
+            expect(locator).to_contain_text(text), msg
 
     def check_presence(self, locator, msg):
         loc = self.page.locator(locator)
@@ -58,12 +55,6 @@ class Assertions(Base):
     def contain_text(self, locator, text: str, msg):  # элемент содержит текст
         loc = self.page.locator(locator)
         expect(loc).to_contain_text(text), msg
-
-    # Select имеет опции для выбора (опция передается аргументом к проверке)
-    def select_have_values(self, locator, options: list, msg):
-        loc = self.page.locator(locator)
-        loc.select_option(options)
-        expect(loc).to_have_values(options), msg
 
     def check_element_visible_and_active_by_index(self, locator, index, msg):
         loc = self.page.locator(locator).nth(index)

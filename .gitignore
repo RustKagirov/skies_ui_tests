@@ -3,6 +3,7 @@ __pycache__/
 *$py.class
 pages/__pycache__
 
+allure-results
 
 # Distribution / packaging
 .Python

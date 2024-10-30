@@ -1,6 +1,5 @@
 import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, sync_playwright
-import os
 
 
 def pytest_addoption(parser):
@@ -26,19 +25,16 @@ def browser(request) -> Page:
     if request.config.getoption("bn") == 'remote_chrome':
         browser = get_remote_chrome(playwright, request)
         context = get_context(browser, request, 'remote')
-        page_data = context.new_page()
     elif request.config.getoption("bn") == 'firefox':
         browser = get_firefox_browser(playwright, request)
         context = get_context(browser, request, 'local')
-        page_data = context.new_page()
     elif request.config.getoption("bn") == 'chrome':
         browser = get_chrome_browser(playwright, request)
         context = get_context(browser, request, 'local')
-        page_data = context.new_page()
     else:
         browser = get_chrome_browser(playwright, request)
         context = get_context(browser, request, 'local')
-        page_data = context.new_page()
+    page_data = context.new_page()
     yield page_data
     for context in browser.contexts:
         context.close()
@@ -77,7 +73,6 @@ def get_context(browser, request, start) -> BrowserContext:
         context.set_default_timeout(
             timeout=request.config.getoption('t')
         )
-        # context.add_cookies([{'url': 'https://example.ru', 'name': 'ab_test', 'value': 'd'}]) добавляем куки, если нужны
         return context
 
     elif start == 'remote':
@@ -88,5 +83,4 @@ def get_context(browser, request, start) -> BrowserContext:
         context.set_default_timeout(
             timeout=request.config.getoption('t')
         )
-        # context.add_cookies([{'url': 'https://example.ru', 'name': 'ab_test', 'value': 'd'}]) добавляем куки, если нужны
         return context
