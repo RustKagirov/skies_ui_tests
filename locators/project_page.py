@@ -14,3 +14,6 @@ class ProjectPage:
     DELETE_PROJECT_FROM_LIST_BUTTON = '.creators__item-button-icon.ng-star-inserted'
     NAME_ADDED_PROJECT = '.creators__item-link'
     IMG_BUTTON_AD_PROJECT = "button.poster__button.ng-star-inserted > img"
+    ADD_AND_REMOVE_FAVORITES_BUTTONS = '.poster__button-icon.ng-star-inserted'
+    COMMENT_LIST = '.comment-list__comments-list'
+    COMMENT = 'comment'

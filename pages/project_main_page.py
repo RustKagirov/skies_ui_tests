@@ -40,7 +40,7 @@ class Project(Base):
         self.click_first_element(ProjectPage.COMMENT_BUTTON)
         self.page.reload()
         last_comment = Base.get_element_by_index(
-            self, '.comment-list__comments-list', 0, 'comment', -1)
+            self, ProjectPage.COMMENT_LIST, 0,ProjectPage.COMMENT, -1)
         self.assertions.to_contain_text(
             last_comment, random_comment, 'Текст комментария не совпал')
 
@@ -50,17 +50,15 @@ class Project(Base):
             'user/42/support', 'Не совпал url страницы поддержки')
 
     def click_and_check_style_favorite_button(self):
-        button_selector = '.poster__button-icon.ng-star-inserted'
-        title_value = self.page.locator(button_selector).get_attribute("title")
+        title_value = self.page.locator(ProjectPage.ADD_AND_REMOVE_FAVORITES_BUTTONS).get_attribute("title")
         if title_value == 'Удалить из закладок':
-            self.click(button_selector)
-        element = self.page.query_selector(button_selector)
+            self.click(ProjectPage.ADD_AND_REMOVE_FAVORITES_BUTTONS)
+        element = self.page.query_selector(ProjectPage.ADD_AND_REMOVE_FAVORITES_BUTTONS)
         if element is None:
             raise ValueError(
-                f"Элемент с селектором '{button_selector}' не найден на странице.")
+                f"Элемент с селектором '{ProjectPage.ADD_AND_REMOVE_FAVORITES_BUTTONS}' не найден на странице.")
         initial_style = element.evaluate('el => el.getAttribute("style")')
-        self.click(button_selector)
-        time.sleep(5)
+        self.click(ProjectPage.ADD_AND_REMOVE_FAVORITES_BUTTONS)
         new_style = element.evaluate('el => el.getAttribute("style")')
         assert initial_style != new_style, "Стиль кнопки не изменился после нажатия"
 
