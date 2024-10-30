@@ -145,20 +145,47 @@ class Base:
     def generate_random_number(min_value=1, max_value=1000000):
         return random.randint(min_value, max_value)
 
+    # def get_element_by_index(self, parent_locator, parent_index, child_locator, child_index):
+    #     parent_loc = self.page.locator(parent_locator)
+    #     if parent_index < 0:
+    #         parent_index += parent_loc.count()
+    #
+    #     if parent_index < 0 or parent_index >= parent_loc.count():
+    #         raise IndexError(f"Индекс родителя {parent_index} вне диапазона.")
+    #
+    #     parent_loc = parent_loc.nth(parent_index)
+    #     child_loc = parent_loc.locator(child_locator)
+    #     if child_index < 0:
+    #         child_index += child_loc.count()
+    #
+    #     if child_index < 0 or child_index >= child_loc.count():
+    #         raise IndexError(f"Индекс ребенка {child_index} вне диапазона.")
+    #
+    #     return child_loc.nth(child_index)
     def get_element_by_index(self, parent_locator, parent_index, child_locator, child_index):
         parent_loc = self.page.locator(parent_locator)
-        if parent_index < 0:
-            parent_index += parent_loc.count()
 
-        if parent_index < 0 or parent_index >= parent_loc.count():
-            raise IndexError(f"Индекс родителя {parent_index} вне диапазона.")
+        # # Проверка наличия элементов
+        # if parent_loc.count() == 0:
+        #     raise IndexError(f"Нет элементов для локатора {parent_locator}.")
+        #
+        # if parent_index < 0:
+        #     parent_index += parent_loc.count()
+        #
+        # if parent_index < 0 or parent_index >= parent_loc.count():
+        #     raise IndexError(f"Индекс родителя {parent_index} вне диапазона.")
 
         parent_loc = parent_loc.nth(parent_index)
         child_loc = parent_loc.locator(child_locator)
-        if child_index < 0:
-            child_index += child_loc.count()
 
-        if child_index < 0 or child_index >= child_loc.count():
-            raise IndexError(f"Индекс ребенка {child_index} вне диапазона.")
+        # # Проверка наличия дочерних элементов
+        # if child_loc.count() == 0:
+        #     raise IndexError(f"Нет дочерних элементов для локатора {child_locator}.")
+        #
+        # if child_index < 0:
+        #     child_index += child_loc.count()
+        #
+        # if child_index < 0 or child_index >= child_loc.count():
+        #     raise IndexError(f"Индекс ребенка {child_index} вне диапазона.")
 
         return child_loc.nth(child_index)

@@ -16,8 +16,6 @@ def pytest_addoption(parser):
                      default=60000, help='Choose timeout')
     parser.addoption('--l', action='store',
                      default='ru-RU', help='Choose locale')
-    # parser.addini('qs_to_api_token', default=os.getenv("QASE_TOKEN"), help='Qase app token')
-
 
 @pytest.fixture(scope='class')
 def browser(request) -> Page:
