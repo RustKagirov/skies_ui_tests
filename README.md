@@ -1,5 +1,3 @@
-<h1>skies_ui_tests</h1>
-
 <h2>Установка:</h2>
 <ul>
     <li>Установить pip</li>
